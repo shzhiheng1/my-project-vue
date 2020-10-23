@@ -1,5 +1,5 @@
 <script>
-// CommitChart.js
+// 柱状图
 import { Bar } from 'vue-chartjs'
 
 export default {
@@ -7,7 +7,8 @@ export default {
   props:['data'],
   mounted () {
     // Overwriting base render method with actual data.
-    this.renderChart(this.data )
+    // data，option
+    this.renderChart(this.data,{responsive: true, maintainAspectRatio: false})
   }
 }
 </script>
