@@ -10,6 +10,7 @@ import Echarts from '@/components/echarts';
 import Inputs from '@/components/inputs';
 import ElTree from '@/components/ElTree';
 import Chart from '@/components/Chart';
+import IndexedDB from '@/components/IndexedDB'
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +72,11 @@ export default new Router({
       path:'/Chart',
       name:'Chart',
       component:Chart
+    },
+    {
+      path:'/indexedDB',
+      name:'IndexedDB',
+      component:IndexedDB
     },
   ]
 })
