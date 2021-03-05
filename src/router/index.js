@@ -11,6 +11,7 @@ import Inputs from '@/components/inputs';
 import ElTree from '@/components/ElTree';
 import Chart from '@/components/Chart';
 import IndexedDB from '@/components/IndexedDB'
+import Directive from '@/components/directive'
 Vue.use(Router)
 
 export default new Router({
@@ -77,6 +78,11 @@ export default new Router({
       path:'/indexedDB',
       name:'IndexedDB',
       component:IndexedDB
+    },
+    {
+      path:'/directive',
+      name:'Directive',
+      component:Directive
     },
   ]
 })
