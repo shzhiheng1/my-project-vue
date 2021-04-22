@@ -16,13 +16,14 @@
     <el-table-column
       align="center"
       label="姓名"
-      width="180">
+      width="180"
+      v-tooltie
+      >
       <template slot-scope="scope" >
-         <Tooltip :tipContent="scope.row.name" :tipTxet="scope.row.code" />
-           <!-- <el-tooltip class="item" effect="dark" :content="scope.row.code " placement="top" >
-            <el-button>{{ scope.row.name }}</el-button> -->
-            <!-- <div v-red="scope.row"></div> -->
-          <!-- </el-tooltip> -->
+         <!-- <Tooltip :tipContent="scope.row.name" :tipTxet="scope.row.code" /> -->
+           <el-tooltip class="item" effect="dark" :content="scope.row.code " placement="top" >
+            <el-button>{{ scope.row.name }}</el-button>
+          </el-tooltip>
       </template>
     </el-table-column>
     <el-table-column label="操作">

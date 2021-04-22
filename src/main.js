@@ -12,6 +12,9 @@ Vue.use(ElementUI)
 /*拖拽插件*/
 import VueDND from 'awe-dnd'
 Vue.use(VueDND)
+/*注册全局指定*/
+import tooltie from './directive/red/tooltie.js'
+Vue.use(tooltie)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

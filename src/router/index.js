@@ -12,6 +12,7 @@ import ElTree from '@/components/ElTree';
 import Chart from '@/components/Chart';
 import IndexedDB from '@/components/IndexedDB'
 import Directive from '@/components/directive'
+import MergeCells from '@/components/mergeCells'
 Vue.use(Router)
 
 export default new Router({
@@ -83,6 +84,11 @@ export default new Router({
       path:'/directive',
       name:'Directive',
       component:Directive
+    },
+    {
+      path:'/mergeCells',
+      name:'MergeCells',
+      component:MergeCells
     },
   ]
 })
