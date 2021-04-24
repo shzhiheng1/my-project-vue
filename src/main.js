@@ -8,6 +8,8 @@ Vue.config.productionTip = false
 /*element插件*/
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+/*引入自定义主题*/ 
+import '@/assets/theme.scss'
 Vue.use(ElementUI)
 /*拖拽插件*/
 import VueDND from 'awe-dnd'

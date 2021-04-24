@@ -22,7 +22,7 @@
       <template slot-scope="scope" >
          <!-- <Tooltip :tipContent="scope.row.name" :tipTxet="scope.row.code" /> -->
            <el-tooltip class="item" effect="dark" :content="scope.row.code " placement="top" >
-            <el-button>{{ scope.row.name }}</el-button>
+            <el-button type="success">{{ scope.row.name }}</el-button>
           </el-tooltip>
       </template>
     </el-table-column>
@@ -30,7 +30,7 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          @click="handleEdit(scope.$index, scope.row)" type="primary">编辑</el-button>
         <el-button
           size="mini"
           type="danger"
