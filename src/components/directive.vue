@@ -44,6 +44,8 @@
 <script>
 import red from '@/directive/red/index.js'
 import Tooltip from './Tooltip'
+// import createToken from '@/utils/createToken.js'
+// import md5 from 'js-md5';
 
 export default {
   directives: {
@@ -77,6 +79,18 @@ export default {
         }]
     }
   },
+  mounted(){
+  // let  $code= 'myApp';
+  // let  $key= '427c579384224abf9570779d82969d1e';
+  // let  $time= '1557034496';
+  //   // md5加密
+  // let token=md5($code +  $key + $time);
+  // let token=md5($code)
+  // let token=createToken();
+  //   console.log(token)
+   let token=sessionStorage.getItem('token')
+    console.log(token)
+  }
 }
 </script>
 
