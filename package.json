@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 0.0.0.0",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "test-dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.test.js"
   },
   "dependencies": {
     "awe-dnd": "^0.3.4",

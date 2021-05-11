@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-      <p>首页</p>
+      <p>首页------当前的运行环境为：{{node_env}}</p>
       <p @click="goTO">测试vuex用法</p>
       <p>{{msg}}</p>
       <router-link to="/HelloWorld">跳转</router-link>
@@ -17,7 +17,8 @@
     export default {
         data(){
             return {
-              msg: 'Welcome to Your Vue.js App'
+              msg: 'Welcome to Your Vue.js App',
+              node_env:process.env.NODE_ENV
             }
         },
       methods:{
