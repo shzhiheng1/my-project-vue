@@ -13,6 +13,8 @@ import Chart from '@/components/Chart';
 import IndexedDB from '@/components/IndexedDB'
 import Directive from '@/components/directive'
 import MergeCells from '@/components/mergeCells'
+import Driver from '@/components/driver'
+
 Vue.use(Router)
 
 export default new Router({
@@ -90,5 +92,10 @@ export default new Router({
       name:'MergeCells',
       component:MergeCells
     },
+    {
+      path:'/driver',
+      name:'Driver',
+      component:Driver
+    }
   ]
 })

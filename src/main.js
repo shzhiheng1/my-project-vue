@@ -20,7 +20,16 @@ Vue.use(tooltie)
 // 设置获取token，保存到sessionStorage中
 import createToken from '@/utils/createToken.js'
 sessionStorage.setItem('token', createToken());
-
+// 帮助引导
+import Driver from 'driver.js' // import driver.js
+import 'driver.js/dist/driver.min.css' // import driver.js css
+Vue.prototype.$driver = new Driver({
+  doneBtnText: '完成', // Text on the final button
+  closeBtnText: '关闭', // Text on the close button for this step
+  stageBackground: '#fff', // Background color for the staged behind highlighted element
+  nextBtnText: '下一步', // Next button text for this step
+  prevBtnText: '上一步', // Previous button text for this step
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
