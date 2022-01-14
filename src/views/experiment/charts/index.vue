@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import Bar from "../public/BarChart.vue";
-import Lines from "../public/LineCart.vue";
-import Pie from "../public/PieChart";
-import Doughnut from '../public/DoughnutChart';
-import Scatter from '../public/ScatterChart';
-import HorizontalBar from '../public/HorizontalBarChart';
-import Radar from "../public/RadarChart";
+import Bar from "@c/charts/BarChart.vue";
+import Lines from "@c/charts/LineCart.vue";
+import Pie from "@c/charts/PieChart";
+import Doughnut from '@c/charts/DoughnutChart';
+import Scatter from '@c/charts/ScatterChart';
+import HorizontalBar from '@c/charts/HorizontalBarChart';
+import Radar from "@c/charts/RadarChart";
   export default {
   data() {
     return {

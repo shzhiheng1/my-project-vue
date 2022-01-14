@@ -11,7 +11,7 @@
 
 <script>
 // import idbKeyval from '../utils/indexedDB';
-import {openDB,addDB,updateDB,removeDB,getAllDB,getIdDB} from '../utils/indexedDB'
+import {openDB,addDB,updateDB,removeDB,getAllDB,getIdDB} from '@u/indexedDB'
 export default {
   data(){
       return {

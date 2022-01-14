@@ -11,7 +11,7 @@
 <script>
  
  import steps from './steps'
- import DriverComponent from './DriverComponent.vue'
+ import DriverComponent from '@c/DriverComponent.vue'
 
 export default {
   components:{

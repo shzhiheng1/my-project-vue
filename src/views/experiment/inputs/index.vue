@@ -59,7 +59,7 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="scss">
   html,body{
     width: 100%;
     height: 100%;
