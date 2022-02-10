@@ -21,6 +21,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #000;
+  font-size: 16px;
 }
 li{
   list-style: none;

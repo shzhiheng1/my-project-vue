@@ -3,7 +3,8 @@ import App from './App'
 import router from './router'
 import Vuex from 'vuex'
 Vue.use(Vuex);
-import store from './store/store';
+// import store from './store/store';
+import store from './store/index'
 Vue.config.productionTip = false
 /*element插件*/
 import ElementUI from 'element-ui'
