@@ -18,39 +18,22 @@
           <el-button @click="setCheckedKeys">通过 key 设置</el-button>
           <el-button @click="resetChecked">清空</el-button>
         </div>
+        <div class="block">
+          <span class="demonstration">默认 click 触发子菜单</span>
+          <el-cascader
+            v-model="value"
+            :props="cascaderProps"
+            :options="options"
+            @active-item-change="handleItemChange"
+            @change="handleChange">
+              
+            </el-cascader>
+        </div>
     </div>
 </template>
 <script>
   export default {
-    methods: {
-      getCheckedNodes() {
-        console.log(this.$refs.tree.getCheckedNodes());
-      },
-      getCheckedKeys() {
-        console.log(this.$refs.tree.getCheckedKeys());
-      },
-      setCheckedNodes() {
-        this.$refs.tree.setCheckedNodes([{
-          id: 5,
-          label: '二级 2-1'
-        }, {
-          id: 9,
-          label: '三级 1-1-1'
-        }]);
-      },
-      setCheckedKeys() {
-        this.$refs.tree.setCheckedKeys([3]);
-      },
-      resetChecked() {
-        this.$refs.tree.setCheckedKeys([]);
-      },
-      // 节点被点击
-      handleNodeClick(data, checked, indeterminate){
-          console.log(data, checked, indeterminate);
-      }
-    },
-
-    data() {
+     data() {
       return {
         data2: [{
           id: 1,
@@ -90,8 +73,83 @@
         defaultProps: {
           children: 'children',
           label: 'label'
-        }
+        },
+        cascaderProps:{
+           label:'name',
+           value:'code'
+        },
+        value: [
+          // 'zhinan','shejiyuanze'
+          ],
+        options:[
+             {
+               code: 'zhinan',
+               name: '指南',
+               children:[
+                //  {
+                //    code: 'shejiyuanze',
+                //    name: '设计原则',
+                //  }
+               ]
+             },
+           ],
       };
-    }
+    },
+    mounted(){
+         if(this.value[1]){
+             this.options[0].children = [
+             {
+                   code: 'shejiyuanze',
+                   name: '设计原则',
+             }]
+         }
+    },
+    methods: {
+      getCheckedNodes() {
+        console.log(this.$refs.tree.getCheckedNodes());
+      },
+      getCheckedKeys() {
+        console.log(this.$refs.tree.getCheckedKeys());
+      },
+      setCheckedNodes() {
+        this.$refs.tree.setCheckedNodes([{
+          id: 5,
+          label: '二级 2-1'
+        }, {
+          id: 9,
+          label: '三级 1-1-1'
+        }]);
+      },
+      setCheckedKeys() {
+        this.$refs.tree.setCheckedKeys([3]);
+      },
+      resetChecked() {
+        this.$refs.tree.setCheckedKeys([]);
+      },
+      // 节点被点击
+      handleNodeClick(data, checked, indeterminate){
+          console.log(data, checked, indeterminate);
+      },
+
+
+      // 值变化
+      handleChange(value) {
+        console.log(value);
+      },
+      // 某一动态加载数据
+      handleItemChange(val){
+        console.log(this.value)
+        console.log('active item:', val);
+        setTimeout(() => {
+          this.options[0].children = [
+             {
+                   code: 'shejiyuanze',
+                   name: '设计原则',
+             }]
+        }, 300);
+      }
+    },
+
+   
   };
 </script>
