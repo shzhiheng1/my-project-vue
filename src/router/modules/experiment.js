@@ -7,6 +7,7 @@ import ElTree from '@v/experiment/elTree'
 import Driver from '@v/experiment/driver'
 import IndexedDB from '@v/experiment/indexedDB'
 import Directive from '@v/experiment/directive'
+import Socket from '@v/experiment/socket'
 
 
 const experimentRoutesMap={
@@ -81,6 +82,16 @@ const experimentRoutesMap={
           component:Directive,
           meta: {
             title: '自定义指令',
+            icon: '',
+            roles: [],menu:true
+          },
+        },
+        {
+          path:'socket',
+          name:'Socket',
+          component:Socket,
+          meta: {
+            title: 'socket.io',
             icon: '',
             roles: [],menu:true
           },
