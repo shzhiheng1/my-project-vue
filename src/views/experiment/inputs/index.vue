@@ -3,14 +3,32 @@
     <div>
         <input ref="pwd"   :maxlength="digits.length" v-model="msg"  style="position: absolute;z-index: -1;opacity: 0"/>
         <ul  class="pwd-wrap" @click="focus">
-            <li v-for="(item,key) in digits" :style="{'margin-right': (130-10*digits.length)/(digits.length-1)+'%','width':'10%'}" >
+            <li v-for="(item,key) in digits" :style="{'margin-right': (130-10*digits.length)/(digits.length-1)+'%','width':'10%'}" :key="key" >
                 <span v-if="msgLength > key">{{msg.substring(key,key+1)}}</span>
             </li>
         </ul>
     </div> 
+    <div class="block">
+      <span class="demonstration">带快捷选项</span>
+      <el-date-picker
+        v-model="value2"
+        type="daterange"
+        :picker-options="pickerOptions"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        align="right"
+        @change="getDate"
+        >
+      </el-date-picker>
+    </div>
 </div>
 </template>
 <script>
+  import moment from 'moment'
+    const _startDate = new Date(moment().subtract(30, 'days').format('YYYY/MM/DD'))
+    const _endDate = new Date(moment().format('YYYY/MM/DD'))
+    let min='';
   export default{
     data(){
       return {
@@ -18,6 +36,46 @@
         digits:['','','','','','','','','','',''],  //input框位数控制,这里可以配置多少个“输入框”
         msg:'',
         msgLength:0,
+        pickerOptions: {
+          shortcuts: [{
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
+            }
+          }],
+          onPick: ({ maxDate,minDate}) => {
+            min=minDate;
+          },
+          disabledDate(time){
+              let m = 31 * 24 * 60 * 60 * 1000;
+              if (min) {
+                  return time.getTime() > (min.getTime()+m)
+                  ||time.getTime() < (min.getTime()-m)||time.getTime() > Date.now();
+              } else {
+                  return time.getTime() > Date.now();
+              }
+          }
+        },
+        value2: [_startDate,_endDate],
       }
     },
     methods:{
@@ -32,6 +90,13 @@
       focus(){
         this.$refs.pwd.focus(); 
       },
+      // 获取时间
+      getDate(val){
+        console.log(val)
+        console.log(this.value2)
+        const date1=moment(this.value2[0]).format('YYYY/MM/DD')
+        console.log(date1)
+      }
     },
     beforeMount:function () {
         this.page=1;

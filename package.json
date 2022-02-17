@@ -16,6 +16,7 @@
     "driver.js": "^0.9.8",
     "echarts": "^4.3.0",
     "element-ui": "2.7.2",
+    "moment": "^2.29.1",
     "socket.io-client": "^4.4.1",
     "vue": "^2.5.2",
     "vue-chartjs": "^3.5.1",
