@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div>测试指令</div>
+    <div>测试指令和自定义表头</div>
     <!-- <div v-red="row" >指令设置背景</div> -->
     <el-table
     :data="tableData"
     style="width: 100%">
     <el-table-column
-      label="日期"
-      width="180">
+      :render-header="renderHeader"
+      :label="datelabel"
+      >
       <template slot-scope="scope">
         <i class="el-icon-time"></i>
         <span style="margin-left: 10px">{{ scope.row.date }}</span>
@@ -46,8 +47,8 @@ import red from '@/directive/red/index.js'
 import Tooltip from './Tooltip'
 // import createToken from '@/utils/createToken.js'
 // import md5 from 'js-md5';
-
 export default {
+  
   directives: {
     red
   },
@@ -76,7 +77,8 @@ export default {
           date: '2016-05-03',
           name: '王小虎2',
           code: 'v069'
-        }]
+        }],
+        datelabel:'日期',
     }
   },
   mounted(){
@@ -90,6 +92,37 @@ export default {
   //   console.log(token)
    let token=sessionStorage.getItem('token')
     console.log(token)
+  },
+  methods:{
+    renderHeader(h,{column}){
+      let _self = this
+       return h(
+         'div',
+         [
+           h('span',{
+             style:'color:#ff0000;'
+           },column.label),
+           h('i',{
+             class:'el-icon-location',
+             style:'color:#409eff;margin-left:5px;'
+           }),
+           h('input',{
+             attrs:{
+                type:'range',
+                value:0,
+             },
+             on:{
+                'change' (event) {
+                  console.log('-------') 
+                //值改变时 
+                //将渲染后的值重新赋值给单元格值   
+                // _self.datelabel= event.target.value;
+               } 
+              }
+           })
+         ]
+       )
+    }
   }
 }
 </script>
