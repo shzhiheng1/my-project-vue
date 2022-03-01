@@ -8,6 +8,7 @@ import Driver from '@v/experiment/driver'
 import IndexedDB from '@v/experiment/indexedDB'
 import Directive from '@v/experiment/directive'
 import Socket from '@v/experiment/socket'
+import Three from '@v/experiment/three'
 
 
 const experimentRoutesMap={
@@ -92,6 +93,16 @@ const experimentRoutesMap={
           component:Socket,
           meta: {
             title: 'socket.io',
+            icon: '',
+            roles: [],menu:true
+          },
+        },
+        {
+          path:'three',
+          name:'Three',
+          component:Three,
+          meta: {
+            title: 'webGL',
             icon: '',
             roles: [],menu:true
           },

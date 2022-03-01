@@ -6406,6 +6406,10 @@ tar@^2.0.0:
     fstream "^1.0.12"
     inherits "2"
 
+three@^0.138.2:
+  version "0.138.2"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.138.2.tgz#946c7c550b58e16606343cec0e44715e8865c04e"
+
 throttle-debounce@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-1.1.0.tgz#51853da37be68a155cb6e827b3514a3c422e89cd"
