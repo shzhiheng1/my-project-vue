@@ -19,6 +19,7 @@
     "moment": "^2.29.1",
     "socket.io-client": "^4.4.1",
     "three": "^0.138.2",
+    "three-obj-mtl-loader": "^1.0.3",
     "vue": "^2.5.2",
     "vue-chartjs": "^3.5.1",
     "vue-router": "^3.0.1",

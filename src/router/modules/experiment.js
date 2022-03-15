@@ -107,6 +107,16 @@ const experimentRoutesMap={
             roles: [],menu:true
           },
         },
+        {
+          path:'base',
+          name:'Base',
+          component:()=>import('@v/experiment/three/base'),
+          meta: {
+            title: 'webGL',
+            icon: '',
+            roles: [],menu:false
+          },
+        },
       ]
 }
 

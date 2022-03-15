@@ -4,7 +4,8 @@
       "modules": false,
       "targets": {
         "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-      }
+      },
+      "exclude":["transform-es2015-classes"]//设置能引用外部的es6的class类
     }],
     "stage-2"
   ],

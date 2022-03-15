@@ -55,3 +55,9 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
       this.$socket.emit('sendMsg', '发送数据到后端服务');
   },
 ```
+- 4.使用three快捷键：
+```js
+npm install typings -g --save
+cd my-project-vue
+typings init
+```
