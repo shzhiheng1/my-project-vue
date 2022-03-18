@@ -12,6 +12,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 /*引入自定义主题*/ 
 import '@/assets/theme.scss'
 Vue.use(ElementUI)
+/*使用单独引入组件*/ 
+import { Cascader } from 'shi-element-ui';
+Vue.component('DustoCascader',Cascader);
 /*拖拽插件*/
 import VueDND from 'awe-dnd'
 Vue.use(VueDND)

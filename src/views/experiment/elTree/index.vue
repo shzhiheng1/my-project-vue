@@ -19,15 +19,25 @@
           <el-button @click="resetChecked">清空</el-button>
         </div>
         <div class="block">
-          <span class="demonstration">默认 click 触发子菜单</span>
+          <span class="demonstration">单选</span>
           <el-cascader
             v-model="value"
             :props="cascaderProps"
             :options="options"
             @active-item-change="handleItemChange"
             @change="handleChange">
-              
             </el-cascader>
+        </div>
+         <div class="block">
+          <span class="demonstration">多选</span>
+            <DustoCascader
+              @change="handleChange2"
+              v-model="value2"
+               collapse-tags
+              :options="options2"
+              :props="cascaderProps2"
+              clearable>
+            </DustoCascader>
         </div>
     </div>
 </template>
@@ -92,8 +102,46 @@
                 //  }
                ]
              },
-           ],
-      };
+        ],
+        value2:[],//多选值
+        cascaderProps2:{
+            label:'name',
+            value:'code',
+            multiple: true
+        },
+        options2:[
+          { 
+            code: 'zhinan',
+            name: '指南',
+            children:[
+                 {
+                   code: 'shejiyuanze',
+                   name: '设计原则',
+                 },
+                 {
+                   code: 'mobiao',
+                   name: '设计目的',
+                 }
+            ]
+          },
+          { 
+            code: 'yuyan',
+            name: '语言',
+            children:[
+                 {
+                   code: 'zhongwen',
+                   name: '中文',
+                 },
+                 {
+                   code: 'yingwen',
+                   name: '英文',
+                 },
+            ]
+          }
+        ]
+      }
+    },
+    components:{
     },
     mounted(){
          if(this.value[1]){
@@ -147,9 +195,11 @@
                    name: '设计原则',
              }]
         }, 300);
+      },
+      // 多选值
+      handleChange2(val){
+         console.log(val)
       }
     },
-
-   
   };
 </script>
