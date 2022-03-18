@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>three.js的基础知识</h1>
-    <div>
-      <button @click="handleAnimate">点击转动</button>
-    </div>
+    <div v-if="loadingProcess<100" class="loading">
+      <div class="box">进度{{loadingProcess}}%</div>
+      </div>
     <div id="container"></div>
+    <el-button @click="()=>{this.$router.go(-1)}">返回</el-button>
   </div>
 </template>
 <script>
@@ -12,6 +12,7 @@ import * as THREE from 'three' //引入
 import {OrbitControls} from './js/OrbitControls'
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OBJLoader, MTLLoader } from 'three-obj-mtl-loader';
+// import Animations from '@/utils/animations.js'
 export default {
   data(){
     return{
@@ -20,7 +21,10 @@ export default {
       renderer:null,
       mesh:null,
       keyboard:{},
-      player:{height:0,speed:0.02,rotationSpeed:Math.PI*0.01}
+      player:{height:0,speed:0.02,rotationSpeed:Math.PI*0.01},
+      loadingProcess:0,//加载进度
+      loadingProcessTimeout:null,//加载定时
+      controls:null,//控制器器
     }
   },
   mounted(){
@@ -28,6 +32,7 @@ export default {
     this.handleAnimate()
     window.addEventListener('keydown',this.keyDown)
     window.addEventListener('keyup',this.keyUp)
+    window.addEventListener('resize',this.onWindowSize)
   },
   methods:{
     init(){
@@ -45,8 +50,27 @@ export default {
       // this.camera.lookAt(new THREE.Vector3(0,0,0))
       // this.camera.lookAt(0,0,0)
 
+
+      // 加载器
+      const manager=new THREE.LoadingManager();
+      manager.onStart=(url,loaded,total)=>{console.log('开始加载')}
+      manager.onLoad=()=>{console.log('加载完成。。。')}
+      manager.onProgress=async(url,loaded,total)=>{
+        console.log(loaded,total)
+        if (Math.floor(loaded / total * 100) === 100) {
+          this.loadingProcessTimeout && clearTimeout(this.loadingProcessTimeout);
+          // let controls =new OrbitControls(this.camera,this.renderer.domElement);//创建控件对象
+          this.loadingProcessTimeout = setTimeout(() => {
+            this.loadingProcess=Math.floor(loaded / total * 100) ;
+            // Animations.animateCamera(this.camera, controls, { x: 0, y: -1, z: 20 }, { x: 0, y: 0, z: 5 }, 3600, () => { });
+          }, 800);
+        } else {
+          this.loadingProcess=Math.floor(loaded / total * 100) ;
+        }
+      }
+
        // 创建贴图
-      var texture = new THREE.TextureLoader();
+      var texture = new THREE.TextureLoader(manager);
       let image1=texture.load( "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1115%2F101021113337%2F211010113337-7-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1648979256&t=88373fabe4e6c764738b3f3d8946eebc" );
       let image2=texture.load('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.1230530.com%2Fpublic%2Fuploads%2Fimages%2F20211017%2F2538_20211017231117c46c5.jpg&refer=http%3A%2F%2Fwww.1230530.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649473909&t=471e8168bfc05ab80e71cb7a5351a7d4')
       let image3=texture.load('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.jj20.com%2Fup%2Fallimg%2F911%2F100416110525%2F161004110525-20.jpg&refer=http%3A%2F%2Fpic.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1649473909&t=c4759d43723c4c9853c3ceae97e9d39e')
@@ -81,7 +105,7 @@ export default {
       meshfloor.rotation.x-=Math.PI/4;
       meshfloor.position.z-=30;
 
-
+   
 
       // 创建箱体
       let boxMesh=new THREE.Mesh(
@@ -92,9 +116,13 @@ export default {
       boxMesh.rotation.set(-Math.PI/4,0,0)
       this.scene.add(boxMesh)
 
+
+      
+
+
       // 导入外部3d模型
       // 小红旗
-      let gltfLoader=new GLTFLoader();
+      let gltfLoader=new GLTFLoader(manager);
       gltfLoader.load('/static/models/flag.glb',(mesh)=> {
         mesh.scene.traverse(child => {
           if (child.isMesh) {
@@ -121,7 +149,7 @@ export default {
         this.scene.add(mesh.scene)
       })
       //  小人
-      let loader=new MTLLoader();
+      let loader=new MTLLoader(manager);
       loader.setTexturePath('/static/models/').load('male02.mtl',(materials)=>{
         materials.preload();
         materials.side = THREE.DoubleSide;
@@ -172,6 +200,17 @@ export default {
 
       // 添加到元素中
       container.appendChild(this.renderer.domElement)
+    },
+    onWindowSize(){
+        let container = document.getElementById("container");
+        // 设置宽高比
+        this.camera.aspect=container.clientWidth / container.clientHeight;
+        // 更新相机投影矩阵
+        this.camera.updateProjectionMatrix();
+          // 设置渲染器的大小
+        this.renderer.setSize(container.clientWidth,container.clientHeight)
+                // 重新绘制
+        this.renderer.render(this.scene,this.camera)
     },
     handleAnimate(){
       requestAnimationFrame(this.handleAnimate);
@@ -233,5 +272,34 @@ export default {
 #container{
   width: 100%;
   height: 600px;
+}
+
+.loading {
+  position: fixed;
+  top: 80px;
+  left: 220px;
+  height: 600px;
+  width: calc(100vw - 240px);
+  background: #FFFFFF url('https://img0.baidu.com/it/u=658809023,3560726099&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500') no-repeat left center;
+  background-size: auto 30%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 120px;
+  color: #2D2D2D;
+  text-shadow:     0 1px 0 hsl(174,5%,80%),
+                   0 2px 0 hsl(174,5%,75%),
+                   0 3px 0 hsl(174,5%,70%),
+                   0 4px 0 hsl(174,5%,66%),
+                   0 5px 0 hsl(174,5%,64%),
+                   0 6px 0 hsl(174,5%,62%),
+                   0 7px 0 hsl(174,5%,61%),
+                   0 8px 0 hsl(174,5%,60%),
+                   0 0 5px rgba(0,0,0,.05),
+                  0 1px 3px rgba(0,0,0,.2),
+                  0 3px 5px rgba(0,0,0,.2),
+                 0 5px 10px rgba(0,0,0,.2),
+                0 10px 10px rgba(0,0,0,.2),
+                0 20px 20px rgba(0,0,0,.3);
 }
 </style>

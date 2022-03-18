@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="container"></div>
+    <el-button type="primary" @click="()=>{this.$router.push({path:'/experiment/base'})}">进入基础页面</el-button>
   </div>
 </template>
 <script>
