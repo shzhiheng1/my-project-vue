@@ -61,3 +61,25 @@ npm install typings -g --save
 cd my-project-vue
 typings init
 ```
+## docker 部署vue项目
+1. 获取nginx镜像
+```
+docker pull nginx
+```
+2. 在项目根目录下创建nginx文件夹，该文件夹下新建文件default.conf
+3. 在跟跟目录下创建 Dockerfile 文件
+4. 基于该Dockerfile构建vue应用镜像(-t 是给镜像命名 . 是基于当前目录的Dockerfile来构建镜像)
+```
+  docker build -t vuenginxcontainer .
+```
+5. 启动 vue app 容器
+```
+  docker run -p 3000:80 -d --name vueApp vuenginxcontainer
+```
+6. 检查容器是否启动(访问：http://localhost:3000)
+```
+docker ps
+```
+
+
+  
