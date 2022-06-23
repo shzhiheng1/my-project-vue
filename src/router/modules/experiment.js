@@ -11,6 +11,7 @@ import Socket from '@v/experiment/socket'
 import Three from '@v/experiment/three'
 
 
+
 const experimentRoutesMap={
       path: '/experiment',
       name: 'Experiment',
@@ -117,6 +118,17 @@ const experimentRoutesMap={
             roles: [],menu:false
           },
         },
+        {
+          path:'debounce',
+          name:'Debounce',
+          component:()=>import('@v/experiment/debounce/index.vue'),
+          meta:{
+            title:'防抖',
+            icon:'',
+            roles:[],
+            menu:true
+          }
+        }
       ]
 }
 
