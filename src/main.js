@@ -50,10 +50,17 @@ Vue.prototype.$driver = new Driver({
   nextBtnText: '下一步', // Next button text for this step
   prevBtnText: '上一步', // Previous button text for this step
 })
+// 引入多语言
+import i18n from './lang';
+// Vue.use(Element, {
+//   // size: Cookies.get('size') || 'medium', // set element-ui default size
+//   i18n: (key, value) => i18n.t(key, value)
+// })
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

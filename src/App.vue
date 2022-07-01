@@ -1,12 +1,34 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view v-if="isRouterAlive"></router-view>
   </div>
 </template>
 
 <script>
+// provide / inject组合(推荐使用)实现页面刷新。
 export default {
-  name: 'App'
+  name: 'App',
+  provide(){
+    return{
+     reload: this.reload
+   }
+  },
+  data() {
+   return {
+       isRouterAlive: true
+   }
+ },
+ methods:{
+  // 通过 $nextTick()，协助实现。先把 移除，移除后再重新添加，达到刷新当前页面的功能。
+   reload(){
+    console.log('-----reload--------')
+     this.isRouterAlive = false
+     this.$nextTick(function(){
+       this.isRouterAlive = true
+     })
+   }
+ }
+
 }
 </script>
 

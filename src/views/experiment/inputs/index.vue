@@ -9,7 +9,7 @@
         </ul>
     </div> 
     <div class="block">
-      <span class="demonstration">带快捷选项</span>
+      <!-- <el-form-item :label="$t('constant.base.search')"> -->
       <el-date-picker
         v-model="value2"
         type="daterange"
@@ -19,19 +19,38 @@
         end-placeholder="结束日期"
         align="right"
         @change="getDate"
+        :default-time="['00:00:00', '23:59:59']"
+         format="yyyy-MM-dd"
+         value-format="yyyy-MM-dd HH:mm:ss"
         >
       </el-date-picker>
+       <el-button type="primary">{{$t('base.search')}}</el-button>
+       <el-button type="primary">{{$t('experiment.commit')}}</el-button>
+       <el-switch
+          v-model="isZh"
+          :inactive-text="$t('common.switchLange')"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          @change="langeChange"
+          >
+        </el-switch>
+        <span>{{new Date().getMilliseconds()}}</span>
+      <!-- </el-form-item> -->
     </div>
 </div>
 </template>
 <script>
+import {getCookie,setCookie} from '@/utils/cookie'
+
   import moment from 'moment'
-    const _startDate = new Date(moment().subtract(30, 'days').format('YYYY/MM/DD'))
-    const _endDate = new Date(moment().format('YYYY/MM/DD'))
+    const _startDate = new Date(moment().subtract(30, 'days').format('YYYY/MM/DD'))+' 00:00:00'
+    const _endDate = new Date(moment().format('YYYY/MM/DD'))+' 23:59:59'
     let min='';
   export default{
+    inject: ['reload'],//使用provide和inject实现页面刷新,但是语言无从新加载，因为main.js未重新加载
     data(){
       return {
+        isZh: true,
         page:0,    //1为短信验证
         digits:['','','','','','','','','','',''],  //input框位数控制,这里可以配置多少个“输入框”
         msg:'',
@@ -78,7 +97,25 @@
         value2: [_startDate,_endDate],
       }
     },
+    mounted(){
+     const lange=getCookie('lange')||'';
+      this.isZh=lange==='en'?false:true
+    },
     methods:{
+      // 切换语言
+      langeChange(){
+         console.log(this.isZh)
+         if(this.isZh){
+             setCookie('lange','zh')
+         }else{
+             setCookie('lange','en')
+         }
+
+         location.reload()
+        //  setTimeout(() => {
+        //    this.reload()// 需要刷新页面（语言更改无法使用）
+        //  }, 500);
+      },
       //手机号码验证接口函数
       verifyTels:async function () {
         try{
