@@ -36,6 +36,8 @@
         </el-switch>
         <span>{{new Date().getMilliseconds()}}</span>
       <!-- </el-form-item> -->
+      <hr/>
+      <el-button type="primary" @click="handleRouter">打开新页面</el-button>
     </div>
 </div>
 </template>
@@ -102,6 +104,12 @@ import {getCookie,setCookie} from '@/utils/cookie'
       this.isZh=lange==='en'?false:true
     },
     methods:{
+      handleRouter(){
+        const routeData = this.$router.resolve({
+                name: 'Echarts'
+            })
+         window.open(routeData.href, '_blank')
+      },
       // 切换语言
       langeChange(){
          console.log(this.isZh)

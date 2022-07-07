@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>测试指令和自定义表头</div>
+    <h2>自定义表头</h2>
     <!-- <div v-red="row" >指令设置背景</div> -->
     <el-table
     :data="tableData"
@@ -38,7 +38,10 @@
           @click="handleDelete(scope.$index, scope.row)">删除</el-button>
       </template>
     </el-table-column>
-  </el-table>
+    </el-table>
+    <h2>测试指令</h2>
+    <h3>自动聚焦指令</h3>
+    <el-input v-model="value1" v-focus  />
   </div>
 </template>
 
@@ -50,13 +53,14 @@ import Tooltip from './Tooltip'
 export default {
   
   directives: {
-    red
+    red,
   },
   components:{
     Tooltip
   },
   data () {
     return {
+      value1:'',
      row:{
        name:'小王',
        code:'周口'

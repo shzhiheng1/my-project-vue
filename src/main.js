@@ -50,6 +50,10 @@ Vue.prototype.$driver = new Driver({
   nextBtnText: '下一步', // Next button text for this step
   prevBtnText: '上一步', // Previous button text for this step
 })
+// 自定义全局指令
+import focus from '@/directive/focus';
+Vue.directive('focus',focus)
+
 // 引入多语言
 import i18n from './lang';
 // Vue.use(Element, {
