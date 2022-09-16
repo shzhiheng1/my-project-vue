@@ -7,7 +7,7 @@
       },
       "exclude":["transform-es2015-classes"]//设置能引用外部的es6的class类
     }],
-    "stage-2"
+    "stage-0"
   ],
   "plugins": [
      "transform-vue-jsx",

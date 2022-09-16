@@ -128,6 +128,17 @@ const experimentRoutesMap={
             roles:[],
             menu:true
           }
+        },
+        {
+          path:'unitTesting',
+          name:'UnitTesting',
+          component:()=>import('@v/experiment/unitTesting/index.vue'),
+          meta:{
+            title:'单元测试',
+            icon:'',
+            roles:[],
+            menu:true
+          }
         }
       ]
 }

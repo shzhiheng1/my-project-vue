@@ -80,6 +80,12 @@ docker pull nginx
 ```
 docker ps
 ```
-
-
+## 单元测试：
+1. 建议使用：通过vue-cli脚手架创建项目时选择自定义模式勾选Unit Testing。
+可以避免因为babel版本问题，导致无法启用问题。
+2. 在老项目中使用单元测试使用：
+```
+ vue add unit-jest
+```
+3. 通过以上命令，项目会新增一些单元测试配置文件，注意：可能因为node版本问题或node_model包未删除或npm缓存为清空等问题导致unit-jest添加失败。添加成功后可能因为babel的版本问题导致单元测试启动失败或vue-cli-service不是内部命令无法启动--》删除node_model重新install。
   
