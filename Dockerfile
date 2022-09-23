@@ -1,6 +1,6 @@
 # 对项目打包操作
 FROM node:12.22.0
-WORKDIR /web
+WORKDIR /app
 COPY package*.json ./
 RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cnpm install
