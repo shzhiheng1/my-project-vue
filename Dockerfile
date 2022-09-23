@@ -1,10 +1,10 @@
 # 对项目打包操作
 FROM node:12.22.0
-WORKDIR /app
-COPY package*.json ./
+# WORKDIR /app
+# COPY package*.json ./
 # RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN yarn
-COPY . .
+# COPY . .
 RUN npm run build
 
 # production stage
@@ -16,7 +16,7 @@ RUN npm run build
 
 # 手动编译
 FROM nginx
-COPY /app/dist /usr/share/nginx/html
+COPY dist/ /usr/share/nginx/html
 # COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
