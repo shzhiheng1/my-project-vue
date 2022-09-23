@@ -1,10 +1,10 @@
 # 对项目打包操作
-FROM node:12.22.0
-COPY . /app
-WORKDIR /app
-# RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-RUN yarn
-RUN npm run build
+# FROM node:12.22.0
+# COPY . /app
+# WORKDIR /app
+# # RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+# RUN yarn
+# RUN npm run build
 
 # production stage
 # FROM nginx:stable-alpine as production-stage
@@ -15,7 +15,7 @@ RUN npm run build
 
 # 手动编译
 FROM nginx
-COPY /app/dist /usr/share/nginx/html
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY /dist /usr/share/nginx/html
+COPY /default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 
