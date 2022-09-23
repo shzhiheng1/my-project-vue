@@ -1,6 +1,6 @@
 # 对项目打包操作
 FROM node:12.22.0
-# WORKDIR /app
+WORKDIR /root/web/my-project-vue/
 # COPY package*.json ./
 # RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN yarn
