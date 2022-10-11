@@ -39,6 +39,14 @@
               clearable>
             </DustoCascader>
         </div>
+        <download-excel
+          class = "export-excel-wrapper"
+          :data = "json_data"
+          :fields = "json_fields"
+          name = "filename.xls">
+          <!-- 上面可以自定义自己的样式，还可以引用其他组件button -->
+          <el-button type="primary" size="small">导出EXCEL</el-button>
+        </download-excel>
     </div>
 </template>
 <script>
@@ -138,7 +146,18 @@
                  },
             ]
           }
-        ]
+        ],
+        json_data:[
+          {
+            'name':'111',
+            'age':22
+          }
+        
+        ],
+        json_fields:{
+          '姓名':'name',
+          "年龄":"age"
+        }
       }
     },
     components:{

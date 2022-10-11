@@ -21,9 +21,14 @@ Vue.use(VueDND)
 /*注册全局指定*/
 import tooltie from './directive/red/tooltie.js'
 Vue.use(tooltie)
+// 前端导出Excel
+import JsonExcel from 'vue-json-excel'
+
+Vue.component('downloadExcel', JsonExcel)
 // 设置获取token，保存到sessionStorage中
 import createToken from '@/utils/createToken.js'
 sessionStorage.setItem('token', createToken());
+
 // socket.io引入
 // import SocketIO  from 'socket.io-client';
 // import VueSocketIO from 'vue-socket.io';

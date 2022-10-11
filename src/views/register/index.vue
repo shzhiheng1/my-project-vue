@@ -2,26 +2,30 @@
   <div class="login">
     <el-card class="card-wrap">
       <div slot="header" class="clearfix">
-        <span>用户登录</span>
+        <span>用户注册</span>
       </div>
-      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="50px" class="demo-ruleForm">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="80px" class="demo-ruleForm">
+           <el-form-item label="用户名" prop="name">
+            <el-input v-model.trim="ruleForm.name"></el-input>
+          </el-form-item>
           <el-form-item label="邮箱" prop="email">
             <el-input v-model.trim="ruleForm.email"></el-input>
           </el-form-item>
           <el-form-item label="密码" prop="password">
             <el-input type="password" v-model.trim="ruleForm.password" autocomplete="off"></el-input>
           </el-form-item>
+          <el-form-item label="确认密码" prop="password2">
+            <el-input type="password" v-model.trim="ruleForm.password2" autocomplete="off"></el-input>
+          </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%;">登录</el-button>
-            <p class="register" @click="toRegister">立即注册</p>
+            <el-button type="primary" @click="submitForm('ruleForm')" style="width:100%;">注册</el-button>
           </el-form-item>
         </el-form>
     </el-card>
   </div>
 </template>
 <script>
-import {PostLogin,PostUsersInfo} from '@/api/users.js'
-import {setCookie} from '@/utils/cookie.js'
+import {PostRegister} from '@/api/users.js'
 export default {
   data(){
     const validatePassword= (rule, value, callback) => {
@@ -51,52 +55,46 @@ export default {
     return {
       ruleForm:{
           password:'',
-          email:''
+          email:'',
+          password2:'',
+          name:''
       },
       rules:{
+          name: [
+            { required: true, message: '用户名不能为空！', trigger: 'blur' },
+            { min: 2, max: 20, message: '长度在 2到 20个字符', trigger: 'blur' }
+          ],
           password: [
+            { validator: validatePassword, trigger: 'blur' }
+          ],
+          password2: [
             { validator: validatePassword, trigger: 'blur' }
           ],
            email: [
             { validator: validateEmail, trigger: 'blur' }
           ],
       }
+
+      
     }
   },
   methods:{
     submitForm(formName){
       this.$refs[formName].validate((valid) => {
           if (valid) {
-            PostLogin(this.ruleForm).then(res=>{
+            PostRegister(this.ruleForm).then(res=>{
               const _err=res.error;
-              const _data=res.data
               if(_err.code===1){
-                setCookie('token',_data.token,120)
-                this.$router.replace({path:'/home'})
-                // 为了测试jwt的token登录认证
-                // this.getUserInfo()
+                this.$router.replace({path:'/login'})
               }
             }).catch(err=>{
-              console.log(err)
+              console.error(err);
             })
           } else {
             console.log('error submit!!');
             return false;
           }
         });
-    },
-    // 注册
-    toRegister(){
-       this.$router.push({path:'/register'})
-    },
-    // 获取用户信息验证
-    async getUserInfo(){
-      try {
-        const res=await PostUsersInfo()
-        console.log(res)
-      } catch (error) {
-        console.error(error);
-      }
     }
   }
 
@@ -107,21 +105,15 @@ export default {
     width: 100%;
     min-height: 900px;
     display: flex;
-         justify-content: center;
-      align-items: center;
+    justify-content: center;
+    align-items: center;
   }
   .card-wrap {
     width: 400px;
   }
-  .clearfix{
+   .clearfix{
     text-align: center;
     font-size: 18px;
     font-weight: bold;
-  }
-  .register{
-    color:blue;
-    text-align: right;
-    cursor: pointer;
-    text-decoration: underline;
   }
 </style>
