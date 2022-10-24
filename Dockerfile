@@ -3,8 +3,7 @@
 FROM node:12.22.0 as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm install -g yarn
-RUN yarn
+RUN npm install --force
 COPY . .
 RUN npm run build
 
