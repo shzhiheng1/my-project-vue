@@ -23,8 +23,12 @@ import tooltie from './directive/red/tooltie.js'
 Vue.use(tooltie)
 // 前端导出Excel
 import JsonExcel from 'vue-json-excel'
-
 Vue.component('downloadExcel', JsonExcel)
+
+// 上传文件夹的插件
+import uploader from 'vue-simple-uploader'
+Vue.use(uploader)
+
 // 设置获取token，保存到sessionStorage中
 import createToken from '@/utils/createToken.js'
 sessionStorage.setItem('token', createToken());

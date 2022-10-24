@@ -6,11 +6,20 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/dusto-admin-api': {
+          // 代理名称   凡是使用/api开头的地址都是用此代理
+          target: "http://admin.uat.dusto-yc.com/new-goods-admin", // 需要代理访问的api地址
+          changeOrigin: true, // 允许跨域请求
+          pathRewrite: {
+              // 重写路径，替换请求地址中的指定路径
+              '^/dusto-admin-api': "/", // 将请求地址中的/api替换为空，也就是请求地址中不会包含/api/
+          },
+        },
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -19,7 +28,7 @@ module.exports = {
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
+    
 
     /**
      * Source Maps
