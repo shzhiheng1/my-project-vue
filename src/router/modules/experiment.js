@@ -1,16 +1,14 @@
 import Layout from '@v/layout'
-import Echarts from '@v/experiment/echarts'
-import Charts from '@v/experiment/charts'
-import Inputs from '@v/experiment/inputs'
-import MergeCells from '@v/experiment/mergeCells'
-import ElTree from '@v/experiment/elTree'
-import Driver from '@v/experiment/driver'
-import IndexedDB from '@v/experiment/indexedDB'
-import Directive from '@v/experiment/directive'
-import Socket from '@v/experiment/socket'
-import Three from '@v/experiment/three'
-
-
+// import Echarts from '@v/experiment/echarts'
+// import Charts from '@v/experiment/charts'
+// import Inputs from '@v/experiment/inputs'
+// import MergeCells from '@v/experiment/mergeCells'
+// import ElTree from '@v/experiment/elTree'
+// import Driver from '@v/experiment/driver'
+// import IndexedDB from '@v/experiment/indexedDB'
+// import Directive from '@v/experiment/directive'
+// import Socket from '@v/experiment/socket'
+// import Three from '@v/experiment/three'
 
 const experimentRoutesMap={
       path: '/experiment',
@@ -21,7 +19,7 @@ const experimentRoutesMap={
         {
           path:'echarts',
           name:'Echarts',
-          component:Echarts,
+          component:()=>import('@v/experiment/echarts'),
           meta: {
             title: 'Echarts图标',
             icon: '',
@@ -31,13 +29,13 @@ const experimentRoutesMap={
         {
           path:'charts',
           name:'Charts',
-          component:Charts,
+          component:()=>import('@v/experiment/charts'),
           meta: {title: 'Chart图标',icon: '',roles: [],menu:true},
         },
         {
           path:'inputs',
           name:'Inputs',
-          component:Inputs,
+          component:import('@v/experiment/inputs'),
           meta: {
             title: '输入框',icon: '',roles: [],menu:true
           }
@@ -45,13 +43,13 @@ const experimentRoutesMap={
         {
           path:'mergeCells',
           name:'MergeCells',
-          component:MergeCells,
+          component:()=>import('@v/experiment/mergeCells'),
           meta: {title: '合并单元格',icon: '',roles: [],menu:true},
         },
         {
           path:'elTree',
           name:'ElTree',
-          component:ElTree,
+          component:()=>import('@v/experiment/elTree'),
           meta: {
             title: 'element结构树',
             icon: '',
@@ -61,7 +59,7 @@ const experimentRoutesMap={
         {
           path:'driver',
           name:'Driver',
-          component:Driver,
+          component:()=>import('@v/experiment/driver'),
           meta: {
             title: '帮助导航',
             icon: '',
@@ -71,7 +69,7 @@ const experimentRoutesMap={
         {
           path:'indexedDB',
           name:'IndexedDB',
-          component:IndexedDB,
+          component:()=>import('@v/experiment/indexedDB'),
           meta: {
             title: 'indexedDB数据存储',
             icon: '',
@@ -81,7 +79,7 @@ const experimentRoutesMap={
         {
           path:'directive',
           name:'Directive',
-          component:Directive,
+          component:()=>('@v/experiment/directive'),
           meta: {
             title: '自定义指令',
             icon: '',
@@ -91,7 +89,7 @@ const experimentRoutesMap={
         {
           path:'socket',
           name:'Socket',
-          component:Socket,
+          component:()=>import('@v/experiment/socket'),
           meta: {
             title: 'socket.io',
             icon: '',
@@ -101,7 +99,7 @@ const experimentRoutesMap={
         {
           path:'three',
           name:'Three',
-          component:Three,
+          component:()=>import('@v/experiment/three'),
           meta: {
             title: 'webGL',
             icon: '',
