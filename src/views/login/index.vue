@@ -105,10 +105,10 @@ export default {
 <style scoped>
   .login{
     width: 100%;
-    min-height: 900px;
+    height: 100vh;
     display: flex;
-         justify-content: center;
-      align-items: center;
+    justify-content: center;
+    align-items: center;
   }
   .card-wrap {
     width: 400px;

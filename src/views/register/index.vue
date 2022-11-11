@@ -103,7 +103,7 @@ export default {
 <style scoped>
   .login{
     width: 100%;
-    min-height: 900px;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

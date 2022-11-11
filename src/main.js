@@ -37,7 +37,7 @@ sessionStorage.setItem('token', createToken());
 // import SocketIO  from 'socket.io-client';
 // import VueSocketIO from 'vue-socket.io';
 // const _SOCKET_API=process.env.SOCKET_API
-// const node_dev=process.env.NODE_ENV
+const node_dev=process.env.NODE_ENV
 // if(node_dev==='production'){
 //   Vue.use(new VueSocketIO({
 //     debug:true,
@@ -63,6 +63,13 @@ Vue.prototype.$driver = new Driver({
 import focus from '@/directive/focus';
 Vue.directive('focus',focus)
 
+
+// 路由拦截
+import './permission'
+// 开发环境使用mock
+if(node_dev==='development'){
+    import('./mock')
+}
 // 引入多语言
 import i18n from './lang';
 // Vue.use(Element, {
