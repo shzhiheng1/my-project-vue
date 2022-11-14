@@ -63,6 +63,8 @@ Vue.prototype.$driver = new Driver({
 import focus from '@/directive/focus';
 Vue.directive('focus',focus)
 
+// 水印指令
+import  '@/directive/watermark.js';
 
 // 路由拦截
 import './permission'
