@@ -70,7 +70,7 @@ import  '@/directive/watermark.js';
 import './permission'
 // 开发环境使用mock
 if(node_dev==='development'){
-    import('./mock')
+    // import('./mock')
 }
 // 引入多语言
 import i18n from './lang';

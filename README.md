@@ -89,3 +89,8 @@ docker ps
 ```
 3. 通过以上命令，项目会新增一些单元测试配置文件，注意：可能因为node版本问题或node_model包未删除或npm缓存为清空等问题导致unit-jest添加失败。添加成功后可能因为babel的版本问题导致单元测试启动失败或vue-cli-service不是内部命令无法启动--》删除node_model重新install。
   
+
+## 其他
+1. 对应的后端node项目地址为：D:\expressStudy\expressStudy001\express-mongodb
+2. 生产环境前端访问地址：http://124.71.194.39:8001/#/home
+3. 生产环境后端服务地址：http://124.71.194.39:3001

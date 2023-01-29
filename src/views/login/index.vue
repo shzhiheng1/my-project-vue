@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import {PostLogin,PostUsersInfo} from '@/api/users.js'
+import {PostLogin} from '@/api/users.js'
 import {setCookie} from '@/utils/cookie.js'
 export default {
   data(){
@@ -73,8 +73,6 @@ export default {
               if(_err.code===1){
                 setCookie('token',_data.token,120)
                 this.$router.replace({path:'/home'})
-                // 为了测试jwt的token登录认证
-                // this.getUserInfo()
               }
             }).catch(err=>{
               console.log(err)
@@ -89,15 +87,6 @@ export default {
     toRegister(){
        this.$router.push({path:'/register'})
     },
-    // 获取用户信息验证
-    async getUserInfo(){
-      try {
-        const res=await PostUsersInfo()
-        console.log(res)
-      } catch (error) {
-        console.error(error);
-      }
-    }
   }
 
 }

@@ -5,6 +5,7 @@ import {getCookie} from '@/utils/cookie.js'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+import store from '@/store'
 
 // 全局路由前置守卫
 router.beforeEach((to, from, next) => {
@@ -15,12 +16,19 @@ router.beforeEach((to, from, next) => {
         next({path:'/home'})
       }else{
         next()
+        // 如果用户刷新重新，获取的用户信息存在store。加计时器为了解决mock测试的bug
+        setTimeout(() => {
+          if(!store.getters.email){
+            store.dispatch('getUserInfo')
+          }
+        }, 500);
       }
   }else{
     if(to.name==='Login'||to.name==='Register'){
       next()
     }else{
       next({name:'Login'})
+      NProgress.done()//完成进度条
     } 
   }
 })

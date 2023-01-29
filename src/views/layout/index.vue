@@ -21,12 +21,11 @@
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
+            <el-dropdown-item @click.native="handleExit">退出登录</el-dropdown-item>
+            <el-dropdown-item @click.native="handleInfo">用户信息</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>王小虎</span>
+        <span>{{email}}</span>
       </el-header>
       
       <el-main>
@@ -40,6 +39,9 @@
 
 
 <script>
+import {setCookie} from '@/utils/cookie.js'
+import {mapGetters} from 'vuex'
+
   export default {
     data() {
       return {
@@ -56,6 +58,9 @@
                     extRotate : -30 //-90到0， 负数值，不包含-90
         },
       }
+    },
+    computed:{
+      ...mapGetters(['email'])
     },
     mounted(){
       const menu= this.$router.options.routes.filter((item)=>item.meta); 
@@ -74,8 +79,16 @@
         }else{
           this.$router.push({path:basePath})
         }
-      }
-
+      },
+      // 退出登录
+      handleExit(){
+        setCookie('token','',0)
+        this.$router.replace({path:'/login'})
+      },
+     // 用户信息
+     handleInfo(){
+      this.$store.dispatch('getUserInfo')
+     }
     }
   };
 </script>

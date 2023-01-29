@@ -10,7 +10,7 @@ export const Service = axios.create({
   method: 'post',
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
-    'authorization':getCookie('token') ||''
+    // 'authorization':getCookie('token') ||''
   }
 })
 // 添加请求拦截器
@@ -19,13 +19,20 @@ Service.interceptors.request.use(config => {
     lock: true,
     text: 'loading...'
   })
-  // config.headers['authorization']= getCookie('token') ||'' //这两种设置headers的方式都是可以的
+  config.headers['authorization']= getCookie('token') ||'' //这两种设置headers的方式都是可以的
   return config
 })
 // 添加响应拦截器
 Service.interceptors.response.use(response => {
   loadingInstance.close()
   // console.log(response)
+  if(response.data.error.code!==1){
+    Message({
+      message: response.data.error.msg,
+      type: 'error',
+      duration: 3 * 1000
+    })
+  }
   return response.data
 }, error => {
   console.log('TCL: error', error)

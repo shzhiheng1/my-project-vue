@@ -65,13 +65,13 @@ export default {
             { min: 2, max: 20, message: '长度在 2到 20个字符', trigger: 'blur' }
           ],
           password: [
-            { validator: validatePassword, trigger: 'blur' }
+            {required: true, validator: validatePassword, trigger: 'blur' }
           ],
           password2: [
-            { validator: validatePassword, trigger: 'blur' }
+            { required: true,validator: validatePassword, trigger: 'blur' }
           ],
            email: [
-            { validator: validateEmail, trigger: 'blur' }
+            { required: true,validator: validateEmail, trigger: 'blur' }
           ],
       }
 
