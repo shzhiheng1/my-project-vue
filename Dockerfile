@@ -3,7 +3,7 @@
 FROM node:12.22.0 as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN yarn
+RUN yarn config set ignore-engines true
 COPY . .
 RUN npm run build
 
