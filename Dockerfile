@@ -1,6 +1,6 @@
 # 对项目打包操作
 
-FROM node:12.22.0 as build-stage
+FROM node:14.19.0 as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN yarn
