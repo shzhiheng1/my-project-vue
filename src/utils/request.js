@@ -5,7 +5,7 @@ const ConfigBaseURL =process.env.BASE_URL_API;//默认路径，这里也可以�
 let loadingInstance = null //这里是loading
 //使用create方法创建axios实例
 export const Service = axios.create({
-  timeout: 7000, // 请求超时时间
+  timeout: 30000, // 请求超时时间30s
   baseURL: ConfigBaseURL,
   method: 'post',
   headers: {
