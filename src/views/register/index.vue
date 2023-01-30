@@ -86,6 +86,7 @@ export default {
               const _err=res.error;
               if(_err.code===1){
                 this.$router.replace({path:'/login'})
+                this.$message({type:'success',message:'注册成功！'})
               }
             }).catch(err=>{
               console.error(err);

@@ -72,6 +72,7 @@ export default {
               const _data=res.data
               if(_err.code===1){
                 setCookie('token',_data.token,120)
+                this.$store.dispatch('getUserInfo')
                 this.$router.replace({path:'/home'})
               }
             }).catch(err=>{
