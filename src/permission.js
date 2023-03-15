@@ -5,12 +5,16 @@ import {getCookie} from '@/utils/cookie.js'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+import getPageTitle from './utils/pageTitle'
+
 import store from '@/store'
 
 // 全局路由前置守卫
 router.beforeEach((to, from, next) => {
   NProgress.start()//显示进度条
   let token =getCookie('token')
+  document.title=getPageTitle(to.meta.title)
+
   if(token){
       if(to.name==='Login'||to.name==='Register'){
         next({path:'/home'})
