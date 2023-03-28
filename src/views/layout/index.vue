@@ -1,7 +1,7 @@
 <template>
 <div v-watermark="watermarkConfig">
   <el-container style="min-height: 100vh; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-aside class="layout-aside" width='200px'>
       <el-menu :default-openeds="defaultOpened" :default-active="defaultActive">
         <el-submenu :index="item.path" v-for="(item) in slideMunu" :key="item.name">
           <template slot="title"><i class="el-icon-message"></i>{{item.meta.title}}</template>
@@ -16,8 +16,8 @@
       </el-menu>
     </el-aside>
     
-    <el-container>
-      <el-header style="text-align: right; font-size: 18px">
+    <el-container class="layout-container">
+      <el-header class="layout-header">
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
@@ -28,7 +28,7 @@
         <span>{{email}}</span>
       </el-header>
       
-      <el-main>
+      <el-main class="layout-main">
         <router-view />
       </el-main>
     </el-container>
@@ -92,13 +92,29 @@ import {mapGetters} from 'vuex'
     }
   };
 </script>
-<style>
-  .el-header {
+<style scoped>
+  .layout-aside{
+    background-color: rgb(238, 241, 246);
+    color: #333;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  .layout-aside::-webkit-scrollbar { width: 0 !important }
+  .layout-container{
+    height: 100vh;
+  }
+  .layout-header {
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
+    text-align: right; 
+    font-size: 18px;
   }
-  .el-aside {
-    color: #333;
+  .layout-main{
+    height: calc(100vh - 60px);
+    overflow-y: scroll;
   }
+  .layout-main::-webkit-scrollbar { width: 0 !important }
+
+
 </style>

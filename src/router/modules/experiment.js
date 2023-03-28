@@ -137,6 +137,28 @@ const experimentRoutesMap={
             roles:[],
             menu:true
           }
+        },
+        {
+            path:'understand',
+              name:'Understand',
+              component:()=>import('@v/experiment/understand/index.vue'),
+              meta:{
+                title:'js的理解',
+                icon:'',
+                roles:[],
+                menu:true
+              },
+        },
+        {
+          path:'copy',
+          name:'Copy',
+          component:()=>import('@v/experiment/understand/copy/index.vue'),
+          meta:{
+            title:'js深浅copy',
+            icon:'',
+            roles:[],
+            menu:false
+          }
         }
       ]
 }
