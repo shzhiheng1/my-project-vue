@@ -1,5 +1,6 @@
 import {Service} from "../utils/request";
 
+
 // 登录
 export function PostLogin(data) {
   return Service({
@@ -8,7 +9,14 @@ export function PostLogin(data) {
     data
   })
 }
-
+// 获取邮箱验证码
+export function PostCaptcha(data) {
+  return Service({
+    url:'/users/captcha',
+    method:'post',
+    data
+  })
+}
 // 注册
 export function PostRegister(data) {
   return Service({
