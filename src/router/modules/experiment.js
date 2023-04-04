@@ -79,7 +79,7 @@ const experimentRoutesMap={
         {
           path:'directive',
           name:'Directive',
-          component:()=>('@v/experiment/directive'),
+          component:()=>import('@v/experiment/directive'),
           meta: {
             title: '自定义指令',
             icon: '',
