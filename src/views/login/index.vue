@@ -72,6 +72,8 @@ export default {
               const _data=res.data
               if(_err.code===1){
                 setCookie('token',_data.token,120)
+                // scoket发送数据服务端
+                this.$socket.emit('sendLogin', this.ruleForm.email+'登录了'); 
                 this.$store.dispatch('getUserInfo')
                 this.$router.replace({path:'/home'})
               }

@@ -5,8 +5,35 @@
 </template>
 
 <script>
+
+
 // provide / inject组合(推荐使用)实现页面刷新。
 export default {
+  // socket
+  sockets: {
+        //查看socket是否连接成功
+        connect() {
+            console.log("socket.io链接成功");
+            // 向服务端发消息
+        },
+        disconnect() {
+            console.log("socket.io断开链接");
+        }, //检测socket断开链接
+        reconnect(data) {
+            console.log("socket.io重新链接",data);
+        },
+        //客户端接收后台传输的socket事件"sendLogin"
+        sendLogin(data) {
+            console.log("收到后端数据：", data); //接收的消息
+             this.$message({
+                message: data,
+                type: 'success'
+              });
+        },
+        // message(data){
+        //     console.log(data)
+        // }
+    },
   name: 'App',
   provide(){
     return{

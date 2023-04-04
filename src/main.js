@@ -34,20 +34,20 @@ import createToken from '@/utils/createToken.js'
 sessionStorage.setItem('token', createToken());
 
 // socket.io引入
-// import SocketIO  from 'socket.io-client';
-// import VueSocketIO from 'vue-socket.io';
-// const _SOCKET_API=process.env.SOCKET_API
+import SocketIO  from 'socket.io-client';
+import VueSocketIO from 'vue-socket.io';
+const _SOCKET_API=process.env.SOCKET_API
 const node_dev=process.env.NODE_ENV
 // if(node_dev==='production'){
-//   Vue.use(new VueSocketIO({
-//     debug:true,
-//     connection: SocketIO(_SOCKET_API),
-//     // vuex: {// 不需要用到vuex这个可以不加
-//     //   store,
-//     //   actionPrefix: 'SOCKET_',
-//     //   mutationPrefix: 'SOCKET_'
-//     // }
-//   }))
+  Vue.use(new VueSocketIO({
+    debug:true,
+    connection: SocketIO(_SOCKET_API),
+    // vuex: {// 不需要用到vuex这个可以不加
+    //   store,
+    //   actionPrefix: 'SOCKET_',
+    //   mutationPrefix: 'SOCKET_'
+    // }
+  }))
 // }
 // 帮助引导
 import Driver from 'driver.js' // import driver.js
