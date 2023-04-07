@@ -12,7 +12,7 @@ export default {
   // socket
   sockets: {
         //查看socket是否连接成功
-        connect() {
+        connect(data) {
             console.log("socket.io链接成功");
             // 向服务端发消息
         },
@@ -25,10 +25,12 @@ export default {
         //客户端接收后台传输的socket事件"sendLogin"
         sendLogin(data) {
             console.log("收到后端数据：", data); //接收的消息
-             this.$message({
-                message: data,
-                type: 'success'
-              });
+            this.$notify({
+              title: '消息',
+              message: data,
+              type:'warning',
+              duration: 10000
+            });
         },
         // message(data){
         //     console.log(data)
@@ -45,6 +47,7 @@ export default {
        isRouterAlive: true
    }
  },
+ mounted(){},
  methods:{
   // 通过 $nextTick()，协助实现。先把 移除，移除后再重新添加，达到刷新当前页面的功能。
    reload(){

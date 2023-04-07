@@ -62,6 +62,18 @@ import {mapGetters} from 'vuex'
     computed:{
       ...mapGetters(['email'])
     },
+    watch:{
+      'email': {
+        handler(newVal, oldVal) {
+          // 刷新时重新发送消息，后端更改socket.id
+          if(newVal){
+             this.$socket.emit('reconnection', { email:newVal });
+          }
+        },
+        deep: true,
+        // immediate: true
+      }
+    },
     mounted(){
       const menu= this.$router.options.routes.filter((item)=>item.meta); 
       this.slideMunu= menu.filter((item)=>item.meta.menu); 
