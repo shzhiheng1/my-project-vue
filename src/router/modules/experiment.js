@@ -159,7 +159,18 @@ const experimentRoutesMap={
             roles:[],
             menu:false
           }
-        }
+        },
+        {
+          path:'waterfall',
+          name:'Waterfall',
+          component:()=>import('@v/experiment/waterfall/index.vue'),
+          meta:{
+            title:'瀑布流',
+            icon:'',
+            roles:[],
+            menu:true
+          }
+        },
       ]
 }
 
